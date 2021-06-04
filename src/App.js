@@ -1,19 +1,32 @@
 import React from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
+import HeaderBar from './components/headerBar'
+import {BodySection} from './components/bodySection'
+//here
+
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <HeaderBar  />
+        <BodySection />
+      </header>
+    </div>
+  );
+}
+
+export default App;
+
+/*
+<img src={logo} className="App-logo" alt="logo" />
         <Counter />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
         <span>
-          
           <span>Learn </span>
           <a
             className="App-link"
@@ -51,9 +64,5 @@ function App() {
             React Redux
           </a>
         </span>
-      </header>
-    </div>
-  );
-}
 
-export default App;
+*/

@@ -1,0 +1,18 @@
+:root {
+    --headerColor: grey;
+}
+
+.subreddit_scrollbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--headerColor);
+
+}
+
+.titleHeader{
+    height: 8vh;
+    width: 100vw;
+    background-color: var(--headerColor);
+}
+

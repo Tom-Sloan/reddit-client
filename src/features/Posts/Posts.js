@@ -7,17 +7,44 @@ import {
   incrementAsync,
   incrementIfOdd,
   selectCount,
-} from './counterSlice';
-import styles from './Counter.module.css';
+} from '../counter/counterSlice';
+import styles from '../counter/Counter.module.css';
+import { loadSubredditData, selectSubJsonPosts } from '../Subreddit/subredditSlice';
+import { 
+  loadPosts, 
+  isLoadingPosts, 
+  failedToLoadPosts, 
+  selectPostsData, 
+  selectAllPosts, 
+  selectState} from '../Posts/postSlice';
 
 
-
-export function Counter() {
+export function Posts() {
   const count = useSelector(selectCount);
   const dispatch = useDispatch();
   const [incrementAmount, setIncrementAmount] = useState('2');
   const incrementValue = Number(incrementAmount) || 0;
   
+  //get required data
+  const subredditPosts = useSelector(selectSubJsonPosts);
+
+  //get status of new data aquisition 
+  // dispatch(createNewPost({data: unloadedData}))
+ 
+  const isLoading = useSelector(isLoadingPosts);
+  const failedToLoad = useSelector(failedToLoadPosts);
+  const postdata = useSelector(selectPostsData);
+  const postState = useSelector(selectState);
+  
+  console.log('Counter postdata:')
+  console.log(postdata);
+  console.log(useSelector(selectAllPosts));
+  console.log(isLoading);
+  console.log(postState);
+
+  useEffect(() => {
+    dispatch(loadPosts(subredditPosts));
+  }, [dispatch, subredditPosts])
   
   return (
     <div>
@@ -67,7 +94,14 @@ export function Counter() {
           Add If Odd
         </button>
       </div>
-      
+      <div className = {styles.row}>
+          {!isLoading && !failedToLoad && Object.values(postdata.posts).map(elm => (
+            <div>
+              <img src={elm.img} alt={elm.title} />
+              <hr/>
+            </div>
+          ))}
+      </div>
     </div>
   );
 }
