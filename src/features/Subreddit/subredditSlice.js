@@ -8,6 +8,8 @@ export const loadSubredditData = createAsyncThunk(
         try{
             const response = await fetch(`https://www.reddit.com/r/${subreddit}/.json`);
             const json = await response.json();
+            console.log("Here");
+            console.log(json);
             return json;
         }catch(e){
             console.log(e)

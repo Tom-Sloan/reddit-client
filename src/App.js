@@ -12,8 +12,10 @@ function App() {
     <div className="App">
       <header className="App-header">
         <HeaderBar  />
-        <BodySection />
       </header>
+      <body>
+        <BodySection />
+      </body>
     </div>
   );
 }
