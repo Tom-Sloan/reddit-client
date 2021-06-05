@@ -17,7 +17,7 @@ import {
   selectPostsData, 
   selectAllPosts, 
   selectState} from '../Posts/postSlice';
-
+import { Comments } from '../Comments/Comments';
 
 export function Posts({elm}) {
   // const count = useSelector(selectCount);
@@ -62,13 +62,16 @@ export function Posts({elm}) {
   } else {
     element = <img src={elm.img} className={styles.gridImg} alt={elm.title} />;
   }
+
+  console.log(elm);
   
   return (
     <div className = {styles.row} elm={elm} >
       {element}
       <hr/>
-      <p className={styles.title} >{elm.title}</p>
+      <p className={styles.title} ><strong>{elm.title}</strong></p>
       <hr/>
+      <Comments postId={elm.id} />
     </div>
   );
 }

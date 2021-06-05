@@ -24,7 +24,7 @@ export const commentsSlice = createSlice({
   });
   
 // export const selectCommentsJsonData = (state) => state.comments.subjson;
-export const {updateComments} = commentsSlice.actions
-
+export const {updateComments} = commentsSlice.actions;
+export const selectComments = (state) => state.comments.comments;
 
 export default commentsSlice.reducer;

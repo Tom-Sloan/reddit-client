@@ -26,7 +26,7 @@ export function BodySection() {
   }, [dispatch, subredditPosts])
   
   return (
-    <div>
+    <div className={styles.bodySection} >
       <div className={styles.gridContainer} >
       {!isLoading && !failedToLoad && Object.values(postdata.posts).map(elm => (
         <div className={styles.gridItem} >
