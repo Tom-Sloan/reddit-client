@@ -21,7 +21,7 @@ export const subredditSlice = createSlice({
     name: 'subreddit',
     initialState: {
         subjson: {
-            favoriteSubreddits: ['cremposting', 'annoucements','funny',  'AskReddit',  'gaming',  'aww',  'Music',  'pics',  'science',  'worldnews',  'videos',  'todayilearned',  'movies',  'news',  'EarthPorn'],
+            favoriteSubreddits: ['cremposting', 'annoucements','funny',  'AskReddit',  'gaming',  'aww',  'Music',  'pics',  'science',  'worldnews',  'videos',  'todayilearned',  'movies',  'news',  'EarthPorn', 'gifs', 'explainlikeimfive', 'mildlyinteresting', 'nottheonion', 'space', 'gadgets'],
             current_subreddit_name:'cremposting',
             posts: []
         },

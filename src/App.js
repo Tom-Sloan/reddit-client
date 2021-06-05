@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import { Counter } from './features/counter/Counter';
-import HeaderBar from './components/headerBar'
+import {HeaderBar} from './components/headerBar'
 import {BodySection} from './components/bodySection'
 //here
 

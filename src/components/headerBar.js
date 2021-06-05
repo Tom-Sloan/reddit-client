@@ -1,177 +1,69 @@
-// import React, { useState, useEffect } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-// import {selectFavoriteSubreddits} from '../features/Subreddit/subredditSlice'
-// import {Subreddit} from '../features/Subreddit/Subreddit'
-// import styles from './styles.module.css'
-// import {TitleHeader} from './titleHeader'
-// // import ScrollMenu from 'react-horizontal-scrolling-menu';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {selectFavoriteSubreddits} from '../features/Subreddit/subredditSlice'
+import {Subreddit} from '../features/Subreddit/Subreddit'
+import './styles.css'
+import {TitleHeader} from './titleHeader'
+import ScrollMenu from 'react-horizontal-scrolling-menu';
+// import ScrollMenu from 'react-horizontal-scrolling-menu';
 
-// export function HeaderBar() {
-//   const subreddits = useSelector(selectFavoriteSubreddits)
-//   return (
-//     <div className={styles.HeaderBar}>
-//       <div className='header'>
-//         <TitleHeader />
-//       </div>
-//       <div className={styles.subreddit_scrollbar}>
-//         {
-//             subreddits.map(elm => <Subreddit name = {elm} />)
-//         }
+export function HeaderBar() {
 
-//       </div>
-//     </div>
-//   );
-// }
-
-import React, { PureComponent } from 'react'
-import debounce from 'lodash.debounce'
-
-export default class HeaderBar extends PureComponent {
-  constructor() {
-    super()
-
-    this.state = {
-      items: [...Array(10).keys()],
-      hasOverflow: false,
-      canScrollLeft: false,
-      canScrollRight: false
-    }
-
-    this.handleClickAddItem = this.handleClickAddItem.bind(this)
-    this.handleClickRemoveItem = this.handleClickRemoveItem.bind(this)
-
-    this.checkForOverflow = this.checkForOverflow.bind(this)
-    this.checkForScrollPosition = this.checkForScrollPosition.bind(this)
-
-    this.debounceCheckForOverflow = debounce(this.checkForOverflow, 1000)
-    this.debounceCheckForScrollPosition = debounce(
-      this.checkForScrollPosition,
-      200
-    )
-
-    this.container = null
-  }
-
-  componentDidMount() {
-    this.checkForOverflow()
-    this.checkForScrollPosition()
-
-    this.container.addEventListener(
-      'scroll',
-      this.debounceCheckForScrollPosition
-    )
-  }
-
-  componentWillUnmount() {
-    this.container.removeEventListener(
-      'scroll',
-      this.debounceCheckForScrollPosition
-    )
-    this.debounceCheckForOverflow.cancel()
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.items.length !== this.state.items.length) {
-      this.checkForOverflow()
-      this.checkForScrollPosition()
-    }
-  }
-
-  checkForScrollPosition() {
-    const { scrollLeft, scrollWidth, clientWidth } = this.container
-
-    this.setState({
-      canScrollLeft: scrollLeft > 0,
-      canScrollRight: scrollLeft !== scrollWidth - clientWidth
-    })
-  }
-
-  checkForOverflow() {
-    const { scrollWidth, clientWidth } = this.container
-    const hasOverflow = scrollWidth > clientWidth
-
-    this.setState({ hasOverflow })
-  }
-
-  handleClickAddItem() {
-    this.setState(state => {
-      return {
-        items: [...state.items, state.items.length]
-      }
-    })
-  }
-
-  handleClickRemoveItem() {
-    this.setState(state => {
-      return {
-        items: state.items.slice(0, -1)
-      }
-    })
-  }
-
-  scrollContainerBy(distance) {
-    this.container.scrollBy({ left: distance, behavior: 'smooth' })
-  }
-
-  buildItems() {
-    return this.state.items.map(item => {
-      return (
-        <li className="item" key={item}>
-          {item + 1}
-        </li>
-      )
-    })
-  }
-
-  buildControls() {
-    const { canScrollLeft, canScrollRight } = this.state
-    return (
-      <div className="item-controls">
-        <button
-          type="button"
-          disabled={!canScrollLeft}
-          onClick={() => {
-            this.scrollContainerBy(-200)
-          }}
-        >
-          Previous
-        </button>
-
-        <button type="button" onClick={this.handleClickAddItem}>
-          Add Item
-        </button>
-
-        <button type="button" onClick={this.handleClickRemoveItem}>
-          Remove Item
-        </button>
-
-        <button
-          type="button"
-          disabled={!canScrollRight}
-          onClick={() => {
-            this.scrollContainerBy(200)
-          }}
-        >
-          Next
-        </button>
+  
+  const subreddits = useSelector(selectFavoriteSubreddits)
+  const [selected, setSelected] = useState(subreddits[0])
+  const menu = Menu(subreddits,selected)
+  
+  return (
+    <div className='HeaderBar' >
+      <div className='header'>
+        <TitleHeader />
       </div>
-    )
-  }
+      { console.log('ScrollMenu:')}
+      { console.log(subreddits)}
+      <ScrollMenu
+          
+          data={menu}
+          arrowLeft={ArrowLeft}
+          arrowRight={ArrowRight}
+          selected={selected}
+          onSelect={setSelected}
+/>
+      {/* <div id='gentags' className={styles.subreddit_scrollbar}>
+        {
+            subreddits.map(elm => <Subreddit name = {elm} />)
+        }
 
-  render() {
-    return (
-      <>
-        <ul
-          className="item-container"
-          ref={node => {
-            this.container = node
-          }}
-        >
-          {this.buildItems()}
-        </ul>
-        {this.buildControls()}
-      </>
-    )
-  }
+      </div> */}
+    </div>
+  );
 }
 
+// One item component
+// selected prop will be passed
+const MenuItem = ({text, selected}) => {
+  return <div
+    className={`menu-item ${selected ? 'active' : ''}`}
+    >{text}</div>;
+};
+
+// All items component
+// Important! add unique key
+// subreddits.map(elm => <Subreddit name = {elm} />)
+export const Menu = (list, selected) =>
+  list.map(el => {
+
+    return <Subreddit name = {el} text={el} key={el} selected={selected} />;
+  });
+
+
+const Arrow = ({ text, className }) => {
+  return (
+    <div
+      className={className}
+    >{text}</div>
+  );
+};
+
+const ArrowLeft = Arrow({ text: '<', className: 'arrow-prev' });
+const ArrowRight = Arrow({ text: '>', className: 'arrow-next' });
