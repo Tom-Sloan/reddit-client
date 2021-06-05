@@ -11,7 +11,7 @@ export function Comments({postId}) {
     let element;
 
     if(allComments.comments[postId].length > 0) {
-        element = allComments.comments[postId].map(comment => (<div><p>{comment}</p><hr/></div>));
+        element = allComments.comments[postId].map(comment => (<div className={styles.comment}><p>{comment}</p><hr/></div>));
     } else {
         element = <div>No Comments</div>;
     }
@@ -19,7 +19,7 @@ export function Comments({postId}) {
     console.log(element)
 
     return (
-        <div className={styles.comment} >
+        <div className={styles.comments}>
             {element}
         </div>
     )
