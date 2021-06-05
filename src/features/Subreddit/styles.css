@@ -2,33 +2,6 @@
   --headerColor: grey;
 }
 
-.subreddit_scrollbar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--headerColor);
-  overflow-x: hidden;
-  overflow-y: hidden;
-}
-
-.titleHeader {
-  height: 8vh;
-  width: 80px;
-  background: rgb(2, 0, 36);
-  background: linear-gradient(
-    90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(9, 9, 121, 1) 35%,
-    rgba(0, 212, 255, 1) 100%
-  );
-}
-.menu-item {
-  padding: 0 40px;
-  margin: 5px 10px;
-  user-select: none;
-  cursor: pointer;
-  border: none;
-}
 .menu-item-wrapper.active {
   border: 1px blue solid;
 }
@@ -37,10 +10,10 @@
 }
 
 .scroll-menu-arrow {
-  padding: 20px;
+  padding: 0px 20px;
   cursor: pointer;
 }
 
 .scrollMenu{
-  background-color: antiquewhite;
+  background-color: rgb(59, 59, 59);
 }

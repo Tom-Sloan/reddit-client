@@ -28,6 +28,7 @@ try {
 let wheelOpt = supportsPassive ? { passive: false } : false;
 let wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
 
+
 const handleEnter = (e) =>{
   console.log('enter')
   window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
