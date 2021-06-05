@@ -1,0 +1,19 @@
+:root {
+  --headerColor: grey;
+}
+
+.menu-item-wrapper.active {
+  border: 1px blue solid;
+}
+.menu-item.active {
+  border: 1px green solid;
+}
+
+.scroll-menu-arrow {
+  padding: 0px 20px;
+  cursor: pointer;
+}
+
+.scrollMenu{
+  background-color: rgb(59, 59, 59);
+}

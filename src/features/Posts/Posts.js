@@ -72,6 +72,7 @@ export function Posts({elm}) {
       <p className={styles.title} ><strong>{elm.title}</strong></p>
       <hr/>
       <Comments postId={elm.id} />
+
     </div>
   );
 }

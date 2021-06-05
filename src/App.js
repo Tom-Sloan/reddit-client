@@ -9,13 +9,9 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <HeaderBar  />
-      </header>
-      <body>
-        <BodySection />
-      </body>
+    <div className="App" >
+      <HeaderBar  className='HeaderBar'/>        
+      <BodySection className='bodySection'/>
     </div>
   );
 }

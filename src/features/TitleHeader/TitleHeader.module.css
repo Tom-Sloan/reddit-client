@@ -1,0 +1,33 @@
+.titleHeader {
+    max-width: 100%;
+    background: rgb(44, 44, 44);
+    background: linear-gradient(
+      90deg,
+      rgba(0, 212, 255, 1) 0%,
+      rgba(9, 9, 121, 1) 35%,
+      rgba(2, 0, 36, 1) 100%
+    );
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logoImage{
+    max-width:10%;
+    max-height: 10%;
+    background-color: transparent;
+    color: transparent;
+    pointer-events: none;
+  }
+
+  .largeHeaderOption{
+    flex:1 1 200px;
+    max-width: 100vh;
+  }
+
+  .smallHeaderOption{
+    height: 100%;
+    flex:0 1 200px;
+    display: flex;
+    justify-content: center;
+  }
