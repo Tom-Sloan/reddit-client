@@ -15,7 +15,11 @@ export const loadPosts = createAsyncThunk(
                 title: elm[0].data.children[0].data.title,
                 ups: elm[0].data.children[0].data.ups,
                 author: elm[0].data.children[0].data.author,
-                img: elm[0].data.children[0].data.url
+                img: elm[0].data.children[0].data.url,
+                is_video: elm[0].data.children[0].data.is_video,
+                thumbnail: elm[0].data.children[0].data.thumbnail,
+                media: elm[0].data.children[0].data.media,
+                is_media: elm[0].data.children[0].data.is_reddit_media_domain,
             }
 
             //to get children make this a recursive function

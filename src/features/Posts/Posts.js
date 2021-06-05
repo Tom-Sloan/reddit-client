@@ -8,7 +8,7 @@ import {
   incrementIfOdd,
   selectCount,
 } from '../counter/counterSlice';
-import styles from '../counter/Counter.module.css';
+import styles from '../../components/bodyStyles.module.css';
 import { loadSubredditData, selectSubJsonPosts } from '../Subreddit/subredditSlice';
 import { 
   loadPosts, 
@@ -17,91 +17,62 @@ import {
   selectPostsData, 
   selectAllPosts, 
   selectState} from '../Posts/postSlice';
+import { Comments } from '../Comments/Comments';
 
-
-export function Posts() {
-  const count = useSelector(selectCount);
-  const dispatch = useDispatch();
-  const [incrementAmount, setIncrementAmount] = useState('2');
-  const incrementValue = Number(incrementAmount) || 0;
+export function Posts({elm}) {
+  // const count = useSelector(selectCount);
+  // const dispatch = useDispatch();
+  // const [incrementAmount, setIncrementAmount] = useState('2');
+  // const incrementValue = Number(incrementAmount) || 0;
   
-  //get required data
-  const subredditPosts = useSelector(selectSubJsonPosts);
+  // //get required data
+  // const subredditPosts = useSelector(selectSubJsonPosts);
 
-  //get status of new data aquisition 
-  // dispatch(createNewPost({data: unloadedData}))
+  // //get status of new data aquisition 
+  // // dispatch(createNewPost({data: unloadedData}))
  
-  const isLoading = useSelector(isLoadingPosts);
-  const failedToLoad = useSelector(failedToLoadPosts);
-  const postdata = useSelector(selectPostsData);
-  const postState = useSelector(selectState);
+  // const isLoading = useSelector(isLoadingPosts);
+  // const failedToLoad = useSelector(failedToLoadPosts);
+  // const postdata = useSelector(selectPostsData);
+  // const postState = useSelector(selectState);
   
-  console.log('Counter postdata:')
-  console.log(postdata);
-  console.log(useSelector(selectAllPosts));
-  console.log(isLoading);
-  console.log(postState);
+  // console.log('Counter postdata:')
+  // console.log(postdata);
+  // console.log(useSelector(selectAllPosts));
+  // console.log(isLoading);
+  // console.log(postState);
 
-  useEffect(() => {
-    dispatch(loadPosts(subredditPosts));
-  }, [dispatch, subredditPosts])
+  // useEffect(() => {
+  //   dispatch(loadPosts(subredditPosts));
+  // }, [dispatch, subredditPosts])
+
+  let element;
+
+  if (elm.is_video) {
+    // element = <embed type="video/webm" className={styles.gridImg} src={elm.img} />;
+    element = (
+      <video className={styles.gridImg} controls={true} autoPlay={true} muted={true} loop={true} playsInline={true} >
+        <source src={elm.media.reddit_video.fallback_url} type="video/mp4"  />
+        Unsupported
+      </video>
+    )
+    // element = <img src={elm.thumbnail} className={styles.gridImg} alt={elm.title} />;
+  } else if (!elm.is_media) {
+    element = <img src="https://i.redd.it/c0kjct56ayc21.jpg" className={styles.gridImg} alt={elm.title} />;
+  } else {
+    element = <img src={elm.img} className={styles.gridImg} alt={elm.title} />;
+  }
+
+  console.log(elm);
   
   return (
-    <div>
-      <div className={styles.row}>
-        <button
-          className={styles.button}
-          aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
-        >
-          -
-        </button>
-        <span className={styles.value}>{count}</span>
-        <button
-          className={styles.button}
-          aria-label="Increment value"
-          onClick={() => {
-            
-            dispatch(increment())
-          }}
-        >
-          +
-        </button>
-      </div>
-      <div className={styles.row}>
-        <input
-          className={styles.textbox}
-          aria-label="Set increment amount"
-          value={incrementAmount}
-          onChange={(e) => setIncrementAmount(e.target.value)}
-        />
-        <button
-          className={styles.button}
-          onClick={() => dispatch(incrementByAmount(incrementValue))}
-        >
-          Add Amount
-        </button>
-        <button
-          className={styles.asyncButton}
-          onClick={() => dispatch(incrementAsync(incrementValue))}
-        >
-          Add Async
-        </button>
-        <button
-          className={styles.button}
-          onClick={() => dispatch(incrementIfOdd(incrementValue))}
-        >
-          Add If Odd
-        </button>
-      </div>
-      <div className = {styles.row}>
-          {!isLoading && !failedToLoad && Object.values(postdata.posts).map(elm => (
-            <div key={elm.title}>
-              <img src={elm.img} alt={elm.title} />
-              <hr/>
-            </div>
-          ))}
-      </div>
+    <div className = {styles.row} elm={elm} >
+      {element}
+      <hr/>
+      <p className={styles.title} ><strong>{elm.title}</strong></p>
+      <hr/>
+      <Comments postId={elm.id} />
+
     </div>
   );
 }
