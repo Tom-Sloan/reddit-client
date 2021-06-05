@@ -9,11 +9,12 @@
   background-color: var(--headerColor);
   overflow-x: hidden;
   overflow-y: hidden;
+  height: 8vh;
 }
 
 .titleHeader {
   height: 8vh;
-  width: 80px;
+  width: 100%;
   background: rgb(2, 0, 36);
   background: linear-gradient(
     90deg,

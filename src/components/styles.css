@@ -40,3 +40,8 @@
   padding: 20px;
   cursor: pointer;
 }
+
+.scrollMenu{
+  height:8vh;
+  background-color: antiquewhite;
+}

@@ -11,7 +11,7 @@ export function Subreddit({name}) {
   }
   return (
     <div key= {name} className='SubredditButtoncontainer'>
-      <button className={styles.SubredditButton} onClick={handleClick}>{name}</button>
+      <button className={styles.SubredditButton} onClick={handleClick} >{name}</button>
     </div>
   );
 }
