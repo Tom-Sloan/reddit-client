@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import styles from './styles.module.css'
+import styles from './TitleHeader.module.css'
 
 export function TitleHeader() {
   
