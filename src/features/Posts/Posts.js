@@ -96,7 +96,7 @@ export function Posts() {
       </div>
       <div className = {styles.row}>
           {!isLoading && !failedToLoad && Object.values(postdata.posts).map(elm => (
-            <div>
+            <div key={elm.title}>
               <img src={elm.img} alt={elm.title} />
               <hr/>
             </div>

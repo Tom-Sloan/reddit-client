@@ -6,7 +6,7 @@ import { Posts } from '../features/Posts/Posts'
 export function BodySection() {
   
   return (
-    <div>
+    <div className='bodySection'>
       <Posts />
     </div>
   );
