@@ -33,6 +33,8 @@ export function BodySection() {
 
   useEffect(() => {
     document.documentElement.style.setProperty("--numCol", numCols);
+    const width = numCols === 1 ? '50%' : numCols === 2 ? '70%' : '80%'
+    document.documentElement.style.setProperty("--maxWidthPercent", width);
   }, [numCols])
   
   return (
