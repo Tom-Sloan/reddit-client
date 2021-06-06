@@ -5,8 +5,8 @@ import { selectComments } from './commentsSlice';
 
 export function Comments({postId}) {
     const allComments = useSelector(selectComments);
-    console.log('comments');
-    console.log(allComments);
+    // console.log('comments');
+    // console.log(allComments);
 
     let element;
 
@@ -16,7 +16,7 @@ export function Comments({postId}) {
         element = <div>No Comments</div>;
     }
 
-    console.log(element)
+    // console.log(element)
 
     return (
         <div className={styles.comments}>
