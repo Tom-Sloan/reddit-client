@@ -1,50 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { 
-  decrement,
-  increment,
-  incrementByAmount,
-  incrementAsync,
-  incrementIfOdd,
-  selectCount,
-} from '../counter/counterSlice';
+import React from 'react';
 import styles from '../../components/bodyStyles.module.css';
-import { loadSubredditData, selectSubJsonPosts } from '../Subreddit/subredditSlice';
-import { 
-  loadPosts, 
-  isLoadingPosts, 
-  failedToLoadPosts, 
-  selectPostsData, 
-  selectAllPosts, 
-  selectState} from '../Posts/postSlice';
+
 import { Comments } from '../Comments/Comments';
 
 export function Posts({elm}) {
-  // const count = useSelector(selectCount);
-  // const dispatch = useDispatch();
-  // const [incrementAmount, setIncrementAmount] = useState('2');
-  // const incrementValue = Number(incrementAmount) || 0;
-  
-  // //get required data
-  // const subredditPosts = useSelector(selectSubJsonPosts);
-
-  // //get status of new data aquisition 
-  // // dispatch(createNewPost({data: unloadedData}))
- 
-  // const isLoading = useSelector(isLoadingPosts);
-  // const failedToLoad = useSelector(failedToLoadPosts);
-  // const postdata = useSelector(selectPostsData);
-  // const postState = useSelector(selectState);
-  
-  // console.log('Counter postdata:')
-  // console.log(postdata);
-  // console.log(useSelector(selectAllPosts));
-  // console.log(isLoading);
-  // console.log(postState);
-
-  // useEffect(() => {
-  //   dispatch(loadPosts(subredditPosts));
-  // }, [dispatch, subredditPosts])
 
   let element;
 
@@ -71,7 +30,7 @@ export function Posts({elm}) {
       <hr/>
       <p className={styles.title} ><strong>{elm.title}</strong></p>
       <hr/>
-      <Comments postId={elm.id} />
+      <Comments key={elm.id} postId={elm.id} />
 
     </div>
   );

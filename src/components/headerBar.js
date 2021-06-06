@@ -30,7 +30,6 @@ let wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewh
 
 
 const handleEnter = (e) =>{
-  console.log('enter')
   window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
   window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
   window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
@@ -38,7 +37,6 @@ const handleEnter = (e) =>{
 }
 
 const handleLeave = (e) => {
-  console.log('leave')
   window.removeEventListener('DOMMouseScroll', preventDefault, false);
   window.removeEventListener(wheelEvent, preventDefault, wheelOpt); 
   window.removeEventListener('touchmove', preventDefault, wheelOpt);

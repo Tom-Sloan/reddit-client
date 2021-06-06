@@ -1,0 +1,20 @@
+.searchBar{
+    appearance: none;
+    background-color: var(--newRedditTheme-field);
+    border-radius: 4px;
+    border: 1px solid var(--newRedditTheme-line);
+    box-shadow: none;
+    color: var(--newRedditTheme-bodyText);
+    height: 36px;
+    outline: none;
+    padding: 0 16px 0 44px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    font-family: inherit;
+    margin: 0;
+    font: inherit;
+    vertical-align: baseline;
+  }
+  

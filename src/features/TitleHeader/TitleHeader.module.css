@@ -1,37 +1,37 @@
 .titleHeader {
-    max-width: 100%;
-    background: rgb(44, 44, 44);
-    background: linear-gradient(
-      90deg,
-      rgba(0, 212, 255, 1) 0%,
-      rgba(9, 9, 121, 1) 35%,
-      rgba(2, 0, 36, 1) 100%
-    );
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-items: center;
+  display: block-flex;
+  background-color: var(--newCommunityTheme-body);
+  border-bottom: 1px solid var(--newCommunityTheme-line);
+  box-sizing: border-box;
+  flex-direction: row;
+  flex-grow: 1;
+  padding: 2px 20px;
+}
 
-  .logoImage{
-    min-width: 10%;
-    max-width:10%;
-    max-height: 10%;
-    background-color: transparent;
-    color: transparent;
-  }
+.logoImage{
+  min-width: 10%;
+  max-width:10%;
+  max-height: 10%;
+  background-color: transparent;
+  color: transparent;
+}
 
-  .changeLayoutIcon{
-    cursor: pointer
-  }
+.changeLayoutIcon{
+  cursor: pointer
+}
 
-  .largeHeaderOption{
-    flex:1 1 200px;
-    max-width: 100vh;
-  }
+.largeHeaderOption{
+  flex:1 1 200px;
+  max-width: 100vh;
+}
 
-  .smallHeaderOption{
-    height: 100%;
-    flex:0 1 200px;
-    display: flex;
-    justify-content: center;
-  }
+.smallHeaderOption{
+  height: 100%;
+  flex:0 1 200px;
+  display: flex;
+  justify-content: center;
+}

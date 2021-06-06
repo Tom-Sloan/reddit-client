@@ -3,32 +3,36 @@ import {updateComments} from '../Comments/commentsSlice'
 
 export const loadPosts = createAsyncThunk(
     'postSlice/loadPosts',
-    async (payload, thunkAPI) => {
-
-        const responses = await Promise.all(payload.map(url => fetch(url)))
-        const jsons = await Promise.all(responses.map(response => response.json()))
+    async ({payload, subredditName}, thunkAPI) => {
         const postData = {};
         const commentData = [];
-        jsons.forEach(elm => {
-            postData[elm[0].data.children[0].data.id] = {
-                id: elm[0].data.children[0].data.id,
-                title: elm[0].data.children[0].data.title,
-                ups: elm[0].data.children[0].data.ups,
-                author: elm[0].data.children[0].data.author,
-                img: elm[0].data.children[0].data.url,
-                is_video: elm[0].data.children[0].data.is_video,
-                thumbnail: elm[0].data.children[0].data.thumbnail,
-                media: elm[0].data.children[0].data.media,
-                is_media: elm[0].data.children[0].data.is_reddit_media_domain,
-            }
+        let jsons;
 
-            //to get children make this a recursive function
-            commentData[elm[0].data.children[0].data.id] = elm[1].data.children.map(commentChunks => commentChunks.data.body)
-        });
-
-        thunkAPI.dispatch(updatePosts({data:postData}))
-        thunkAPI.dispatch(updateComments({data:commentData}))
-        return jsons;
+        if(!isAlreadyLoaded(thunkAPI.getState())){            
+            const responses = await Promise.all(payload.map(url => fetch(url)))
+            jsons = await Promise.all(responses.map(response => response.json()))
+            
+            jsons.forEach(elm => {
+                postData[elm[0].data.children[0].data.id] = {
+                    id: elm[0].data.children[0].data.id,
+                    title: elm[0].data.children[0].data.title,
+                    ups: elm[0].data.children[0].data.ups,
+                    author: elm[0].data.children[0].data.author,
+                    img: elm[0].data.children[0].data.url,
+                    is_video: elm[0].data.children[0].data.is_video,
+                    thumbnail: elm[0].data.children[0].data.thumbnail,
+                    media: elm[0].data.children[0].data.media,
+                    is_media: elm[0].data.children[0].data.is_reddit_media_domain,
+                }
+                //to get children make this a recursive function
+                commentData[elm[0].data.children[0].data.id] = elm[1].data.children.map(commentChunks => commentChunks.data.body)
+            });
+            thunkAPI.dispatch(updatePosts({subredditName:subredditName, data:postData}))
+            thunkAPI.dispatch(updateComments({subredditName:subredditName, data:commentData}))
+            console.log(postData)
+        }
+        
+        return {subredditName:subredditName, jsons:jsons};
         
     }
 );
@@ -37,7 +41,7 @@ export const postsSlice = createSlice({
     name: 'posts',
     initialState: {
         allPostData: {
-            posts: {},
+            
         },
         errorLoading: false,
         isLoading: false,
@@ -45,12 +49,16 @@ export const postsSlice = createSlice({
     // The `reducers` field lets us define reducers and generate associated actions
     reducers: {
         updatePosts: (state, action) => {
-            state.allPostData = {
+            console.log(action)
+            const obj = action.payload.data;
+            if (obj && Object.keys(obj).length !== 0 && obj.constructor === Object){
+                state.allPostData = {
                 ...state.allPostData,
-                posts: action.payload.data
+                [action.payload.subredditName]: obj
             }
-
             console.log(state)
+            }
+            
         },
         setErrorLoading: (state, action) => {
             state = {
@@ -98,6 +106,7 @@ export const postsSlice = createSlice({
 export const selectPostsData = (state) => state.posts.allPostData;
 export const isLoadingPosts = (state) => state.posts.isLoading;
 export const failedToLoadPosts = (state) => state.posts.errorLoading;
+export const isAlreadyLoaded = (state) => Object.keys(state.posts.allPostData).includes(state.subreddit.subjson.currentSubredditName);
 export const selectAllPosts = (state) => state.posts.allPostData;
 export const selectState = (state) => state;
 

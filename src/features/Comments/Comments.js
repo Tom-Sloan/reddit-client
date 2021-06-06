@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from '../../components/bodyStyles.module.css';
 import { selectComments } from './commentsSlice';
+import {selectCurrentSubredditName} from '../Subreddit/subredditSlice'
 
 export function Comments({postId}) {
     const allComments = useSelector(selectComments);
-    // console.log('comments');
-    // console.log(allComments);
 
     let element;
-
-    if(allComments.comments[postId].length > 0) {
-        element = allComments.comments[postId].map(comment => (<div className={styles.comment}><p>{comment}</p><hr/></div>));
+    console.log('allcomments')
+    console.log(allComments)
+    if( allComments[postId].length > 0) {
+        element = allComments[postId].map(comment => (<div className={styles.comment}><p>{comment}</p><hr/></div>));
     } else {
         element = <div>No Comments</div>;
     }
@@ -19,7 +19,7 @@ export function Comments({postId}) {
     // console.log(element)
 
     return (
-        <div className={styles.comments}>
+        <div key= {'comment_'+postId} className={styles.comments}>
             {element}
         </div>
     )

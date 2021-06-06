@@ -7,28 +7,30 @@ import {
   isLoadingPosts, 
   failedToLoadPosts, 
   selectPostsData, 
-  selectState} from '../features/Posts/postSlice';
-import { selectSubJsonPosts } from '../features/Subreddit/subredditSlice';
+  selectState,
+  isAlreadyLoaded
+} from '../features/Posts/postSlice';
+import { selectSubJsonPosts, selectCurrentSubredditName } from '../features/Subreddit/subredditSlice';
 import { selectColumnNumber } from '../features/TitleHeader/titleHeaderSlice';
 
 export function BodySection() {
   const dispatch = useDispatch();
   const subredditPosts = useSelector(selectSubJsonPosts);
+  const currentSubreddit = useSelector(selectCurrentSubredditName)
 
   const isLoading = useSelector(isLoadingPosts);
   const failedToLoad = useSelector(failedToLoadPosts);
   const postdata = useSelector(selectPostsData);
-  const postState = useSelector(selectState);
+  const alreadyLoaded = useSelector(isAlreadyLoaded)
+  console.log(alreadyLoaded)
 
   const numCols = useSelector(selectColumnNumber);
 
-  console.log("Num Cols");
-  console.log(numCols);
-
+  const postState = useSelector(selectState);
   console.log(postState);
 
   useEffect(() => {
-    dispatch(loadPosts(subredditPosts));
+    dispatch(loadPosts({payload:subredditPosts, subredditName: currentSubreddit}));
   }, [dispatch, subredditPosts])
 
   useEffect(() => {
@@ -40,9 +42,10 @@ export function BodySection() {
   return (
     <div className={styles.bodySection} >
       <div className={styles.gridContainer} >
-      {!isLoading && !failedToLoad && Object.values(postdata.posts).map(elm => (
+      {!isLoading && !failedToLoad && postdata[currentSubreddit] && Object.values(postdata[currentSubreddit]).map(elm => (
+        
         <div className={styles.gridItem} >
-          <Posts elm={elm}/>
+          <Posts key={elm.id} elm={elm}/>
         </div>
       ))}
       </div>

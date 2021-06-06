@@ -4,7 +4,7 @@ export const commentsSlice = createSlice({
     name: 'comments',
     initialState: {
         comments: {
-            comments: {}
+            
         },
 
     },
@@ -12,12 +12,12 @@ export const commentsSlice = createSlice({
     reducers: {
         updateComments: (state, action) => {
             // console.log('\n\nInside updateCommetns\n\n')
-            // console.log('UpdateComments')
+            console.log('UpdateComments')
             // console.log(current(state))
-            // console.log(action)
+            console.log(action)
             state.comments = {
                 ...state.comments,
-                comments: action.payload.data
+                [action.payload.subredditName]: action.payload.data
             }
         }
     },
@@ -25,6 +25,6 @@ export const commentsSlice = createSlice({
   
 // export const selectCommentsJsonData = (state) => state.comments.subjson;
 export const {updateComments} = commentsSlice.actions;
-export const selectComments = (state) => state.comments.comments;
+export const selectComments = (state) => state.comments.comments[state.subreddit.subjson.currentSubredditName]||{};
 
 export default commentsSlice.reducer;

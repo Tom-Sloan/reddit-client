@@ -1,16 +1,19 @@
 import { createAsyncThunk, createSlice, current } from '@reduxjs/toolkit';
-import {useDispatch} from 'react-redux'
-import {loadPosts} from '../Posts/postSlice'
 
 export const loadSubredditData = createAsyncThunk(
     'subredditSlice/loadSubredditData',
-    async (subreddit) => {
+    async ({subreddit, search}, thunkAPI) => {
         try{
-            const response = await fetch(`https://www.reddit.com/r/${subreddit}/.json`);
+            let response;
+            if (subreddit)
+                response = await fetch(`https://www.reddit.com/r/${subreddit}/.json`);
+            else{
+                const searchQuery = search.replace(' ', '%20')
+                response = await fetch(`https://www.reddit.com/search.json?q=${searchQuery}`);
+            }
+                
             const json = await response.json();
-            console.log("Here");
-            console.log(json);
-            return json;
+            return {subreddit:subreddit?subreddit:'search', json:json};
         }catch(e){
             console.log(e)
         }
@@ -23,8 +26,8 @@ export const subredditSlice = createSlice({
     name: 'subreddit',
     initialState: {
         subjson: {
-            favoriteSubreddits: ['cremposting', 'annoucements','funny',  'AskReddit',  'gaming',  'aww',  'Music',  'pics',  'science',  'worldnews',  'videos',  'todayilearned',  'movies',  'news',  'EarthPorn', 'gifs', 'explainlikeimfive', 'mildlyinteresting', 'nottheonion', 'space', 'gadgets'],
-            current_subreddit_name:'cremposting',
+            favoriteSubreddits: ['popular','cremposting', 'annoucements','funny',  'AskReddit',  'gaming',  'aww',  'Music',  'pics',  'science',  'worldnews',  'videos',  'todayilearned',  'movies',  'news',  'EarthPorn', 'gifs', 'explainlikeimfive', 'mildlyinteresting', 'nottheonion', 'space', 'gadgets'],
+            currentSubredditName:'popular',
             posts: []
         },
         errorLoading: false,
@@ -33,12 +36,10 @@ export const subredditSlice = createSlice({
     // The `reducers` field lets us define reducers and generate associated actions
     reducers: {
         updateSubreddit: (state, action) => {
-            // console.log('updateSubreddit: ')
-            // console.log(action)
             state.subjson = {
                 ...state.subjson,
-                current_subreddit_name: action.payload.data.children[0].data.subreddit,
-                posts: action.payload.data.children.map(child => `https://www.reddit.com${child.data.permalink}.json`)
+                currentSubredditName: action.payload.subreddit,
+                posts: action.payload.json.data.children.map(child => `https://www.reddit.com${child.data.permalink}.json`)
             }
         }
     },
@@ -73,6 +74,7 @@ export const subredditSlice = createSlice({
   
 export const selectSubJsonPosts = (state) => state.subreddit.subjson.posts;
 export const selectFavoriteSubreddits = (state) => state.subreddit.subjson.favoriteSubreddits;
+export const selectCurrentSubredditName = (state) => state.subreddit.subjson.currentSubredditName;
 export const isLoadingSubreddit = (state) => state.subreddit.isLoading;
 export const failedToLoadSubreddit = (state) => state.subreddit.errorLoading;
 export const {updateSubreddit} = subredditSlice.actions
