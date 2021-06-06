@@ -4,7 +4,7 @@ export const titleHeaderSlice = createSlice({
     name: 'titleHeader',
     initialState: {
         data:{
-            columnNumber: 1 ,
+            columnNumber: 3 ,
             columnImg: [
                 "/./resources/grid-icon_1.png",
                 "/./resources/grid-icon_2.png",
