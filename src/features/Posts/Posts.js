@@ -63,7 +63,7 @@ export function Posts({elm}) {
     element = <img src={elm.img} className={styles.gridImg} alt={elm.title} />;
   }
 
-  console.log(elm);
+  // console.log(elm);
   
   return (
     <div className = {styles.row} elm={elm} >

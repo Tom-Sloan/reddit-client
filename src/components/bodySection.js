@@ -9,6 +9,7 @@ import {
   selectPostsData, 
   selectState} from '../features/Posts/postSlice';
 import { selectSubJsonPosts } from '../features/Subreddit/subredditSlice';
+import { selectColumnNumber } from '../features/TitleHeader/titleHeaderSlice';
 
 export function BodySection() {
   const dispatch = useDispatch();
@@ -19,11 +20,20 @@ export function BodySection() {
   const postdata = useSelector(selectPostsData);
   const postState = useSelector(selectState);
 
+  const numCols = useSelector(selectColumnNumber);
+
+  console.log("Num Cols");
+  console.log(numCols);
+
   console.log(postState);
 
   useEffect(() => {
     dispatch(loadPosts(subredditPosts));
   }, [dispatch, subredditPosts])
+
+  useEffect(() => {
+    document.documentElement.style.setProperty("--numCol", numCols);
+  }, [numCols])
   
   return (
     <div className={styles.bodySection} >
