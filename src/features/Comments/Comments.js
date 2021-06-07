@@ -8,8 +8,8 @@ export function Comments({postId}) {
     const allComments = useSelector(selectComments);
 
     let element;
-    console.log('allcomments')
-    console.log(allComments)
+    // console.log('allcomments')
+    // console.log(allComments)
     if( allComments[postId].length > 0) {
         element = allComments[postId].map((comment, index) => (
         <div id={'comment_'+postId+'-'+index} className={styles.comment}>

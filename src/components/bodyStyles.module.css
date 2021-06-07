@@ -1,35 +1,59 @@
 .bodySection {
-    height: 100%;
-    min-width:100%; 
-    max-width: 100%;
-    overflow: scroll;
+  height: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  overflow: scroll;
 }
 
 .gridContainer {
-    display: grid;
-    grid-template-columns: repeat(var(--numCol), 1fr);
-    /* grid-template-rows: 100px auto; */
-    grid-auto-flow: row;
-    max-width: var(--maxWidthPercent);
-    object-fit: contain;
-    margin: auto;
+  display: grid;
+  grid-template-columns: repeat(var(--numCol), 1fr);
+  /* grid-template-rows: 100px auto; */
+  grid-auto-flow: row;
+  max-width: var(--maxWidthPercent);
+  object-fit: contain;
+  margin: auto;
 }
 
 .gridItem {
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    text-align: center;
-    grid-auto-flow: column dense;
-    min-width: 0;
-    min-height: 0;
-    /* max-height: 500px; */
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  text-align: center;
+  grid-auto-flow: column dense;
+  min-width: 0;
+  min-height: 0;
+  /* max-height: 500px; */
 }
 
 .gridImg {
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
-    border: solid 3px blue;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  border: solid 3px blue;
 }
 
+.scrollDownHeader {
+  transform: translate3d(0, -100%, 0);
+  transition: transform var(--headerAnimation);
+}
+
+.scrollUpHeader {
+  transform: none;
+  transition: transform var(--headerAnimation);
+}
+
+.scrollUpBody {
+  transform: none;
+  transition: transform var(--headerAnimation);
+}
+
+.scrollDownBody {
+  transform: translate3d(0, calc(-1*var(--headerHeight)), 0);
+  transition: transform var(--headerAnimation);
+}
+.HeaderBar {
+  border: 2px solid turquoise;
+
+  /* transform: translate3d(0, -100%, 0); */
+}

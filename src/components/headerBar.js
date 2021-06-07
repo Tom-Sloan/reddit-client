@@ -1,7 +1,8 @@
 import React from 'react';
 import {TitleHeader} from '../features/TitleHeader/TitleHeader'
 import {SubredditsBar} from '../features/Subreddit/SubredditsBar'
-
+import styles from './bodyStyles.module.css';
+import { useEffect, useState } from 'react';
 // left: 37, up: 38, right: 39, down: 40,
 // spacebar: 32, pageup: 33, pagedown: 34, end: 35, home: 36
 let keys = {37: 1, 38: 1, 39: 1, 40: 1};
@@ -43,9 +44,24 @@ const handleLeave = (e) => {
   window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
 }
 
+
 export function HeaderBar() {
+  
+  useEffect(() => {
+    const updateWindowDimensions = () => {
+      const newHeight = document.getElementById('HeaderBar_id').clientHeight;
+      document.documentElement.style.setProperty("--headerHeight", (newHeight+'px'));
+    };
+
+    window.addEventListener("resize", updateWindowDimensions);
+    updateWindowDimensions()
+    return () => window.removeEventListener("resize", updateWindowDimensions) 
+
+  }, []);
+
+  
   return (
-    <div className='HeaderBar' onMouseEnter={handleEnter} onMouseLeave={handleLeave}>
+    <div id='HeaderBar_id'  className={styles.HeaderBar}  onMouseEnter={handleEnter} onMouseLeave={handleLeave}>
       <TitleHeader />
       <SubredditsBar />
     </div>

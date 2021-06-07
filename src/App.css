@@ -3,13 +3,13 @@
   overflow: hidden
 }
 
-.HeaderBar{
-  /* position: fixed;
+/* .HeaderBar{
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1; */
-}
+  z-index: 1; 
+} */
 
 .bodySection{
   height: 100%;
@@ -18,9 +18,13 @@
   overflow: scroll;
 }
 
+
+
 :root {
   --numCol: 1;
   --maxWidthPercent: 50%;
+  --headerAnimation: 0.4s;
+  --headerHeight: 100px;
   --newCommunityTheme-actionIcon: #818384;
   --newCommunityTheme-actionIconAlpha20: rgba(129,131,132,0.2);
   --newCommunityTheme-actionIconAlpha50: rgba(129,131,132,0.5);

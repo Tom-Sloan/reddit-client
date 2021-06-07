@@ -8,10 +8,11 @@ import {BodySection} from './components/bodySection'
 import './App.css';
 
 function App() {
+
   return (
     <div className="App" >
-      <HeaderBar  className='HeaderBar'/>        
-      <BodySection className='bodySection'/>
+      <HeaderBar />        
+      <BodySection />
     </div>
   );
 }
