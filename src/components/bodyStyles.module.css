@@ -33,16 +33,3 @@
     border: solid 3px blue;
 }
 
-.comments {
-    overflow-y: scroll;
-}
-
-.comment {
-    font-size: 1rem;
-    max-width: 100%;
-    height: auto;
-    object-fit: contain;
-    border: solid 3px blue;
-    text-align: left;
-    overflow-wrap: break-word;
-}
