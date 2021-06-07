@@ -43,6 +43,7 @@ export const postsSlice = createSlice({
         allPostData: {
             
         },
+        commentsToDisplay: 2,
         errorLoading: false,
         isLoading: false,
     },
@@ -109,6 +110,7 @@ export const failedToLoadPosts = (state) => state.posts.errorLoading;
 export const isAlreadyLoaded = (state) => Object.keys(state.posts.allPostData).includes(state.subreddit.subjson.currentSubredditName);
 export const selectAllPosts = (state) => state.posts.allPostData;
 export const selectState = (state) => state;
+export const selectCommentsToDisplay = (state) => state.posts.commentsToDisplay;
 
 export const {updatePosts, setErrorLoading, setIsLoading} = postsSlice.actions;
 
