@@ -1,11 +1,11 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 
 import styles from "./Posts.module.css";
 
-import { Comments } from "../Comments/Comments";
+import {Post} from './Post'
 
 export function Posts({ elm, windowHeight }) {
-
+  const [popUpState, setPopUpState] = useState(false);
 
   let element;
 
@@ -26,34 +26,27 @@ export function Posts({ elm, windowHeight }) {
     );
     // element = <img src={elm.thumbnail} className={styles.gridImg} alt={elm.title} />;
   } else if (!elm.is_media) {
-    element = (
+    element = null;
+    /*
+    (
       <img
         src="https://i.redd.it/c0kjct56ayc21.jpg"
         className={styles.gridImg}
         alt={elm.title}
       />
     );
+    */
   } else {
     element = <img src={elm.img} className={styles.gridImg} alt={elm.title} />;
   }
-  // console.log(document.querySelectorAll("PostTile"))
-  // VanillaTilt.init(reference, {
-  //   max: 25,
-  //   speed: 400,
-  // });
-  // console.log(elm);
+
+  const handleClick = (e) => {
+    setPopUpState((prev) => !prev);
+  };
 
   return (
-    <div className={`${styles.row} PostTile`} elm={elm}>
-      <div className={styles.innerContainer}>
-        {element}
-        <hr />
-        <p className={styles.title}>
-          <strong>{elm.title}</strong>
-        </p>
-        <hr />
-        <Comments key={elm.id} postId={elm.id} windowHeight={windowHeight} />
-      </div>
+    <div className={`${styles.row} PostTile`} elm={elm} onClick={handleClick}>
+      {<Post elm={elm} element={element} isPopUp= {popUpState} windowHeight={windowHeight}/>}
     </div>
   );
 }

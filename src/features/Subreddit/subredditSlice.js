@@ -4,7 +4,7 @@ export const loadSubredditData = createAsyncThunk(
   "subredditSlice/loadSubredditData",
   async (
     {
-      subreddit,
+      subreddit='EarthPorn',
       search = false,
       limit = 100,
       timeframe = "month",
@@ -46,7 +46,7 @@ export const subredditSlice = createSlice({
   initialState: {
     subjson: {
       favoriteSubreddits: [
-        "popular",
+        "EarthPorn",
         "cremposting",
         "annoucements",
         "funny",
@@ -61,7 +61,7 @@ export const subredditSlice = createSlice({
         "todayilearned",
         "movies",
         "news",
-        "EarthPorn",
+        "popular",
         "gifs",
         "explainlikeimfive",
         "mildlyinteresting",
@@ -69,7 +69,7 @@ export const subredditSlice = createSlice({
         "space",
         "gadgets",
       ],
-      currentSubredditName: "popular",
+      currentSubredditName: "EarthPorn",
       posts: [],
       postDisplayLimit: 25,
     },
@@ -88,8 +88,6 @@ export const subredditSlice = createSlice({
       };
     },
     updatePostDisplayLimit: (state, action) => {
-        console.log('updatePostDisplayLimit')
-        console.log(action)
       state.subjson = {
         ...state.subjson,
         postDisplayLimit: action.payload,

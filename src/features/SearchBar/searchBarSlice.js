@@ -10,12 +10,12 @@ export const searchBarSlice = createSlice({
     // The `reducers` field lets us define reducers and generate associated actions
     reducers: {
         updateSearchBar: (state) => {
-            console.log(current(state))
+            
             state.data = {
                 ...state.data,
                 columnNumber: state.data.columnNumber % 4 + 1,
             }
-            console.log(current(state))
+
         },
     },
   });

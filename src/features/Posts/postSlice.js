@@ -5,7 +5,7 @@ export const loadPosts = createAsyncThunk(
     'postSlice/loadPosts',
     async ({payload, subredditName}, thunkAPI) => {
         const postData = {};
-        const commentData = [];
+        const commentData = {};
         let jsons;
 
         if(!isAlreadyLoaded(thunkAPI.getState())){            
@@ -13,6 +13,7 @@ export const loadPosts = createAsyncThunk(
             jsons = await Promise.all(responses.map(response => response.json()))
             
             jsons.forEach(elm => {
+                
                 postData[elm[0].data.children[0].data.id] = {
                     id: elm[0].data.children[0].data.id,
                     title: elm[0].data.children[0].data.title,
@@ -25,11 +26,11 @@ export const loadPosts = createAsyncThunk(
                     is_media: elm[0].data.children[0].data.is_reddit_media_domain,
                 }
                 //to get children make this a recursive function
-                commentData[elm[0].data.children[0].data.id] = elm[1].data.children.map(commentChunks => commentChunks.data.body)
+                commentData[elm[0].data.children[0].data.id] = elm[1].data.children;
             });
             thunkAPI.dispatch(updatePosts({subredditName:subredditName, data:postData}))
             thunkAPI.dispatch(updateComments({subredditName:subredditName, data:commentData}))
-            console.log(postData)
+            // console.log(postData)
         }
         
         return {subredditName:subredditName, jsons:jsons};
@@ -50,14 +51,14 @@ export const postsSlice = createSlice({
     // The `reducers` field lets us define reducers and generate associated actions
     reducers: {
         updatePosts: (state, action) => {
-            console.log(action)
+            // console.log(action)
             const obj = action.payload.data;
             if (obj && Object.keys(obj).length !== 0 && obj.constructor === Object){
                 state.allPostData = {
                 ...state.allPostData,
                 [action.payload.subredditName]: obj
             }
-            console.log(state)
+            // console.log(state)
             }
             
         },

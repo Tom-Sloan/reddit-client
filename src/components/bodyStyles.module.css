@@ -9,6 +9,11 @@
   box-sizing: content-box;
 }
 
+.HeaderBar {
+  min-height: 10%;
+  border: 2px dashed gold;
+}
+
 .gridContainer {
   display: grid;
   grid-template-columns: repeat(var(--numCol), 1fr);

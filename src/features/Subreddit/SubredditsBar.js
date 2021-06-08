@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import {selectFavoriteSubreddits} from './subredditSlice'
 import {Subreddit} from './Subreddit'
-import './styles.css'
+import styles from './Subreddit.module.css'
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 
 export function SubredditsBar() {
@@ -12,7 +12,7 @@ export function SubredditsBar() {
   const menu = Menu(subreddits,selected)
   
   return (
-    <div className='scrollMenu'>
+    <div className={styles.scrollMenu}>
     <ScrollMenu
         data={menu}
         arrowLeft={ArrowLeft}

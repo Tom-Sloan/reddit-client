@@ -16,6 +16,9 @@ import {
   selectCurrentSubredditName,
   selectPostDisplayLimit,
   updatePostDisplayLimit,
+  loadSubredditData,
+  failedToLoadSubreddit,
+  isLoadingSubreddit,
 } from "../features/Subreddit/subredditSlice";
 import { selectColumnNumber } from "../features/TitleHeader/titleHeaderSlice";
 import { Footer } from "./footer";
@@ -29,11 +32,13 @@ export function BodySection() {
   const subredditPosts = useSelector(selectSubJsonPosts); // contains all posts urls
   const currentSubreddit = useSelector(selectCurrentSubredditName); //contains the key for which posts to view
   const isLoading = useSelector(isLoadingPosts); // so we know if we are just waiting for data
+  const isLoadingSub = useSelector(isLoadingSubreddit)
+  const failedToLoadSub = useSelector(failedToLoadSubreddit)
   const failedToLoad = useSelector(failedToLoadPosts); // so we know if thre is an error in data aqusistion
   const postdata = useSelector(selectPostsData); // contains all posts
   const numCols = useSelector(selectColumnNumber); //contians the layout format
   const postDisplayLimit = useSelector(selectPostDisplayLimit);
-  
+
   //Not needed but useful and possibly will be used in the future
   // const alreadyLoaded = useSelector(isAlreadyLoaded)
   // console.log(alreadyLoaded)
@@ -68,8 +73,10 @@ export function BodySection() {
       header.classList.add(scrollDownHeader);
       body.classList.add(scrollDownBody);
       LoadingFooter.style.display = "block";
-      dispatch(updatePostDisplayLimit(50));
-      console.log('change')
+      const limit =
+        postDisplayLimit === 25 ? 50 : postDisplayLimit === 50 ? 75 : 100;
+      console.log(limit);
+      dispatch(updatePostDisplayLimit(limit));
       return;
     }
     LoadingFooter.style.display = "none";
@@ -102,12 +109,8 @@ export function BodySection() {
         document.documentElement.clientHeight || 0,
         window.innerHeight || 0
       );
-      console.log("vh:");
-      console.log(vh);
 
       setWindowHeight(vh);
-
-      console.log("updating height");
     };
 
     window.addEventListener("resize", updateWindowDimensions);
@@ -123,25 +126,28 @@ export function BodySection() {
     document.documentElement.style.setProperty("--maxWidthPercent", width);
   }, [numCols]);
 
-  if (isLoading) return <div className={styles.loader}></div>;
+  if (isLoading || isLoadingSub) return <div className={styles.loader}></div>;
 
-  const gridInsides =
-    !isLoading &&
+  let gridInsides;
+
+  if (
+    !isLoadingSub && ! failedToLoadSub && !isLoading &&
     !failedToLoad &&
     postdata[currentSubreddit] &&
-    Object.values(postdata[currentSubreddit]) ? (
-      Array.apply(null, { length: numCols })
-    ) : (
-      <p>Errror</p>
-    );
+    Object.values(postdata[currentSubreddit])
+  ) {
+    gridInsides = Array.apply(null, { length: numCols });
+  } else if(!failedToLoad&& !failedToLoadSub){
+    dispatch(loadSubredditData({ subreddit: "EarthPorn" }));
+    gridInsides = <p></p>;
+  }
 
   if (Array.isArray(gridInsides)) {
     for (let i = 0; i < numCols; i++) {
       gridInsides[i] = (
         <div className={styles.gridItem}>
           {Object.values(postdata[currentSubreddit]).map((elm, index) => {
-            if (index< postDisplayLimit)
-              return
+            if (index > postDisplayLimit) return null;
             return (
               index % numCols === i && (
                 <Posts key={elm.id} elm={elm} windowHeight={windowHeight} />

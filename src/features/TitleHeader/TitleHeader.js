@@ -11,16 +11,14 @@ export function TitleHeader() {
   const columnLayoutImage = useSelector(selectImageLink)
   
   const handleClick = (e)=>{
-    console.log("clicked!")
-    console.log(columnNumber)
-    console.log(columnLayoutImage)
+
     dispatch(updateTitleHeader())
   }
   
   return (
     <div className={styles.titleHeader}>
       <div className={styles.smallHeaderOption}>
-        <img className = {styles.logoImage} src="/./logo_v3.png" alt="redditProfit" />
+        <img className = {styles.logoImage} src="/./resources/logo.png" alt="redditProfit" />
       </div>
       <div className={styles.largeHeaderOption}>
         <SearchBar />

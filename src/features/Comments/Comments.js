@@ -6,30 +6,32 @@ import { selectCommentsToDisplay } from "../Posts/postSlice";
 
 export function Comments({ postId, windowHeight }) {
   const [innerHeight, setHeight] = useState(0);
-  const allComments = useSelector(selectComments);
+  let allCommentsData = useSelector(selectComments)[postId].map(
+    (commentChunks) => commentChunks.data
+  );
+
   const maxCommentLength = useSelector(selectCommentsToDisplay);
 
   let element;
-  // console.log('allcomments')
-  // console.log(allComments)
-  if (allComments[postId].length > 0) {
-    element = allComments[postId].map((comment, index) => {
-      if (index < allComments[postId].length - 1)
+
+  if (allCommentsData.length > 0) {
+    element = allCommentsData.map((comment, index) => {
+      if (index < allCommentsData.length - 1)
         return (
           <div
             id={"comment_" + postId + "-" + index}
             className={styles.comment}
           >
-            <p>{comment}</p>
+            <p style={{ color: "blue" }}>{comment.author}</p>
+            <p>{comment.body}</p>
             <hr />
           </div>
         );
       return (
         <div id={"comment_" + postId + "-" + index} className={styles.comment}>
-          <p>{comment}</p>
-          <div className={styles.endpoint}>
-            
-          </div>
+          <p style={{ color: "blue" }}>{comment.author}</p>
+          <p>{comment.body}</p>
+          <div className={styles.endpoint}></div>
         </div>
       );
     });
@@ -40,9 +42,9 @@ export function Comments({ postId, windowHeight }) {
   useEffect(() => {
     let height = 0;
     let limit =
-      allComments[postId].length > maxCommentLength - 1
+      allCommentsData.length > maxCommentLength - 1
         ? maxCommentLength
-        : allComments[postId].length;
+        : allCommentsData.length;
     for (let i = 0; i < limit; i++) {
       try {
         height += document.getElementById(
