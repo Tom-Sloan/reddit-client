@@ -10,6 +10,7 @@ export function Subreddit({name, text, selected}) {
   function handleClick(e){
     console.log(name)
     dispatch(loadSubredditData({subreddit:name, search:false}))
+    document.querySelector("#bodySection_id").scrollTo(0, 0);
   }
 
   return (

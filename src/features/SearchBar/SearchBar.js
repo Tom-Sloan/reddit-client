@@ -9,7 +9,7 @@ export function SearchBar() {
     if (e.key === 'Enter') {
       console.log('do validate');
       console.log(e.target.value)
-      dispact(loadSubredditData({subreddit:false, search:e.target.value}))
+      dispact(loadSubredditData({subreddit:'search', search:e.target.value}))
     }
   }
   return (

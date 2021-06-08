@@ -1,5 +1,10 @@
 .comments {
+    width: 100%;
+    height: 100%;
     overflow-y: scroll;
+    padding-right: 23px; /* Increase/decrease this value for cross-browser compatibility */
+    box-sizing: content-box;
+
 }
 
 .comment {
@@ -10,4 +15,14 @@
     /* border: solid 3px blue; */
     text-align: left;
     overflow-wrap: break-word;
+
+}
+
+.endpoint{
+    height: 5vh;
+    background-color: gainsboro;
+    margin: 0 auto;
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 0 0 var(--postBorderRadius) var(--postBorderRadius) ;
 }

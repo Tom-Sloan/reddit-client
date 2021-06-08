@@ -1,21 +1,7 @@
 .App{
   height: 100vh;
-  overflow: hidden
-}
+  overflow: hidden;
 
-/* .HeaderBar{
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1; 
-} */
-
-.bodySection{
-  height: 100%;
-  min-width:100%; 
-  max-width: 100%;
-  overflow: scroll;
 }
 
 
@@ -25,6 +11,7 @@
   --maxWidthPercent: 50%;
   --headerAnimation: 0.4s;
   --headerHeight: 100px;
+  --postBorderRadius: 10px;
   --newCommunityTheme-actionIcon: #818384;
   --newCommunityTheme-actionIconAlpha20: rgba(129,131,132,0.2);
   --newCommunityTheme-actionIconAlpha50: rgba(129,131,132,0.5);

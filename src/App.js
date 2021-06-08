@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+
 import {HeaderBar} from './components/headerBar'
 import {BodySection} from './components/bodySection'
-//here
+
 
 import './App.css';
 
@@ -18,6 +18,7 @@ function App() {
 }
 
 export default App;
+
 
 /*
 <img src={logo} className="App-logo" alt="logo" />

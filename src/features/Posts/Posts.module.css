@@ -2,10 +2,21 @@
   max-width: 100%;
   height: auto;
   object-fit: contain;
+  border-radius: var(--postBorderRadius);
   /* border: solid 3px blue; */
 }
-.row{
-    border: solid 2px orange;
-    margin: 10px 0;
+.row {
+  margin: 10px auto;
+  border-radius: var(--postBorderRadius);
+  padding: 5px;
+  height: auto;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0px 2px 3px 2px black;
+  transition: all 0.4s ease-in;
 }
 
+.row:hover {
+  background-color: rgba(138, 138, 138, 0.075);
+  box-shadow: 0px 4px 3px 2px black;
+}
