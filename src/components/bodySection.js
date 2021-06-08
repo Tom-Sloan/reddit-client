@@ -16,6 +16,8 @@ import { selectColumnNumber } from '../features/TitleHeader/titleHeaderSlice';
 export function BodySection() {
   const dispatch = useDispatch();
   const [lastScroll, setLastScroll] = useState(0);
+  const [windowHeight, setWindowHeight] = useState(0);
+
   //Variables used to set up dislay
   const subredditPosts = useSelector(selectSubJsonPosts); // contains all posts urls
   const currentSubreddit = useSelector(selectCurrentSubredditName) //contains the key for which posts to view
@@ -29,6 +31,8 @@ export function BodySection() {
   // console.log(alreadyLoaded)
   // const postState = useSelector(selectState);
   // console.log(postState);
+
+  
 
   const hideHeader = (e) => {
     const header = document.getElementById('HeaderBar_id');
@@ -71,21 +75,55 @@ export function BodySection() {
     dispatch(loadPosts({payload:subredditPosts, subredditName: currentSubreddit}));
   }, [dispatch, subredditPosts])
 
+  useEffect(() => {
+    const updateWindowDimensions = () => {
+
+      const vh = Math.max(
+        document.documentElement.clientHeight || 0,
+        window.innerHeight || 0
+      );
+      console.log("vh:");
+      console.log(vh);
+
+      setWindowHeight(vh);
+      
+      console.log("updating height");
+    };
+
+    window.addEventListener("resize", updateWindowDimensions);
+    updateWindowDimensions()
+
+    return () => window.removeEventListener("resize", updateWindowDimensions);
+  }, []);
+
   //changes the diplay layout
   useEffect(() => {
     document.documentElement.style.setProperty("--numCol", numCols);
     const width = numCols === 1 ? '50%' : numCols === 2 ? '70%' : '80%'
     document.documentElement.style.setProperty("--maxWidthPercent", width);
   }, [numCols])
+
+  if (isLoading)
+    return <div className={styles.loader}></div>
+
+  const gridInsides = !isLoading && !failedToLoad && postdata[currentSubreddit] && Object.values(postdata[currentSubreddit])?Array.apply(null, {length: numCols}):<p>Errror</p>
+  
+  if (Array.isArray(gridInsides)){
+    for(let i = 0; i < numCols; i++){
+      gridInsides[i] = (
+        <div className={styles.gridItem} >
+          {Object.values(postdata[currentSubreddit]).map((elm, index) => (
+            index%numCols===i&&<Posts key={elm.id} elm={elm} windowHeight={windowHeight}/>
+          ))}
+        </div>
+      )
+    }
+  }
   
   return (
     <div id='bodySection_id' className={styles.bodySection} onScroll={hideHeader}>
       <div className={styles.gridContainer} >
-      {!isLoading && !failedToLoad && postdata[currentSubreddit] && Object.values(postdata[currentSubreddit]).map(elm => (
-        <div className={styles.gridItem} >
-          <Posts key={elm.id} elm={elm}/>
-        </div>
-      ))}
+      {gridInsides}
       </div>
     </div>
   );

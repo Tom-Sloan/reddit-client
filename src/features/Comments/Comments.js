@@ -4,9 +4,8 @@ import styles from "./Comments.module.css";
 import { selectComments } from "./commentsSlice";
 import { selectCommentsToDisplay } from "../Posts/postSlice";
 
-export function Comments({ postId }) {
+export function Comments({ postId, windowHeight}) {
   const [innerHeight, setHeight] = useState(0);
-  const [windowHeight, setWindowHeight] = useState(0);
   const allComments = useSelector(selectComments);
   const maxCommentLength = useSelector(selectCommentsToDisplay);
 
@@ -23,7 +22,7 @@ export function Comments({ postId }) {
   } else {
     element = <div>No Comments</div>;
   }
-
+  
   useEffect(() => {
     let height = 0;
     let limit =
@@ -36,26 +35,6 @@ export function Comments({ postId }) {
       ).clientHeight;
     }
     setHeight(Math.min(Math.ceil(windowHeight/3), height + 40));
-  }, []);
-
-  useEffect(() => {
-    const updateWindowDimensions = () => {
-
-      const vh = Math.max(
-        document.documentElement.clientHeight || 0,
-        window.innerHeight || 0
-      );
-      console.log("vh:");
-      console.log(vh);
-
-      setWindowHeight(vh);
-      console.log("updating height");
-    };
-
-    window.addEventListener("resize", updateWindowDimensions);
-    updateWindowDimensions()
-
-    return () => window.removeEventListener("resize", updateWindowDimensions);
   }, []);
 
   return (

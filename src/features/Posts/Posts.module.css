@@ -1,0 +1,11 @@
+.gridImg {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  /* border: solid 3px blue; */
+}
+.row{
+    border: solid 2px orange;
+    margin: 10px 0;
+}
+

@@ -5,12 +5,13 @@
   
 .SubredditButton {
     background-color: rgb(133, 134, 134);
-    border-radius: 25%;
-    padding: 0 40px;
+    border-radius: 5%;
+    padding: 0 5px;
     margin: 5px 10px;
     user-select: none;
     cursor: pointer;
     border: none;
+    width: fit-content;
 }
 
 .activeBtn{

@@ -1,9 +1,10 @@
 import React from 'react';
-import styles from '../../components/bodyStyles.module.css';
+// import styles from '../../components/bodyStyles.module.css';
+import styles from './Posts.module.css'
 
 import { Comments } from '../Comments/Comments';
 
-export function Posts({elm}) {
+export function Posts({elm, windowHeight}) {
 
   let element;
 
@@ -30,7 +31,7 @@ export function Posts({elm}) {
       <hr/>
       <p className={styles.title} ><strong>{elm.title}</strong></p>
       <hr/>
-      <Comments key={elm.id} postId={elm.id} />
+      <Comments key={elm.id} postId={elm.id} windowHeight={windowHeight}/>
 
     </div>
   );
