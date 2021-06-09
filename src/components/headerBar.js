@@ -31,6 +31,7 @@ let wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewh
 
 
 const handleEnter = (e) =>{
+
   window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
   window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
   window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
@@ -38,6 +39,7 @@ const handleEnter = (e) =>{
 }
 
 const handleLeave = (e) => {
+
   window.removeEventListener('DOMMouseScroll', preventDefault, false);
   window.removeEventListener(wheelEvent, preventDefault, wheelOpt); 
   window.removeEventListener('touchmove', preventDefault, wheelOpt);
@@ -59,9 +61,8 @@ export function HeaderBar() {
 
   }, []);
 
-  
   return (
-    <div id='HeaderBar_id'  className={styles.HeaderBar}  onMouseEnter={handleEnter} onMouseLeave={handleLeave}>
+    <div id='HeaderBar_id'  className={`${styles.HeaderBar} ${styles.animation}`} onMouseEnter={handleEnter} onMouseLeave={handleLeave}>
       <TitleHeader />
       <SubredditsBar />
     </div>

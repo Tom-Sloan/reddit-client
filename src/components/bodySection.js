@@ -28,6 +28,7 @@ export function BodySection() {
   const [lastScroll, setLastScroll] = useState(0);
   const [windowHeight, setWindowHeight] = useState(0);
 
+
   //Variables used to set up dislay
   const subredditPosts = useSelector(selectSubJsonPosts); // contains all posts urls
   const currentSubreddit = useSelector(selectCurrentSubredditName); //contains the key for which posts to view
@@ -50,16 +51,16 @@ export function BodySection() {
     const body = document.querySelector("#bodySection_id");
     const LoadingFooter = document.querySelector("#LoadingFooter");
 
-    const scrollUpHeader = styles.scrollUpHeader;
-    const scrollDownHeader = styles.scrollDownHeader;
-    const scrollUpBody = styles.scrollUpBody;
-    const scrollDownBody = styles.scrollDownBody;
+    const scrollUp = styles.scrollUp;
+    const scrollDown = styles.scrollDown;
+    const animation = styles.animation;
 
     const currentScroll = body.scrollTop;
-
+    document.documentElement.style.setProperty("--popUpHieght", currentScroll);
+    
     if (currentScroll <= 0) {
-      header.classList.remove(scrollUpHeader);
-      body.classList.remove(scrollUpBody);
+      header.classList.remove(scrollUp);
+      body.classList.remove(scrollUp);
       return;
     }
 
@@ -70,8 +71,8 @@ export function BodySection() {
         header.clientHeight -
         LoadingFooter.clientHeight
     ) {
-      header.classList.add(scrollDownHeader);
-      body.classList.add(scrollDownBody);
+      header.classList.add(scrollDown);
+      body.classList.add(scrollDown);
       LoadingFooter.style.display = "block";
       const limit =
         postDisplayLimit === 25 ? 50 : postDisplayLimit === 50 ? 75 : 100;
@@ -79,20 +80,24 @@ export function BodySection() {
       dispatch(updatePostDisplayLimit(limit));
       return;
     }
+    header.classList.add(animation);
+    body.classList.add(animation);
     LoadingFooter.style.display = "none";
     if (currentScroll > lastScroll) {
       // down
-      header.classList.remove(scrollUpHeader);
-      header.classList.add(scrollDownHeader);
-      body.classList.remove(scrollUpBody);
-      body.classList.add(scrollDownBody);
+      console.log("down");
+      header.classList.remove(scrollUp);
+      header.classList.add(scrollDown);
+      body.classList.remove(scrollUp);
+      body.classList.add(scrollDown);
     } else if (currentScroll < lastScroll) {
       // up
-      header.classList.remove(scrollDownHeader);
-      header.classList.add(scrollUpHeader);
-      body.classList.remove(scrollDownBody);
-      body.classList.add(scrollUpBody);
+      header.classList.remove(scrollDown);
+      header.classList.add(scrollUp);
+      body.classList.remove(scrollDown);
+      body.classList.add(scrollUp);
     }
+
     setLastScroll(currentScroll);
   };
 
@@ -164,7 +169,7 @@ export function BodySection() {
   return (
     <div
       id="bodySection_id"
-      className={styles.bodySection}
+      className={`${styles.bodySection} ${styles.animation}`}
       onScroll={hideHeader}
     >
       <div className={styles.gridContainer}>{gridInsides}</div>

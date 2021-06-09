@@ -9,12 +9,13 @@ export function Post({ elm, element, windowHeight, isPopUp }) {
     e.stopPropagation();
   };
 
+
   return (
-    <div className={`${styles.row} Post`}>
+    <div className={`${styles.row} Post`} >
       {isPopUp && (
-        <div className={styles.modal}>
-          <div className={styles.modal_content} onClick={handleClick}>
-            <div>
+        <div className={styles.modal} >
+          <div className={styles.modal_container} onClick={handleClick} >
+            <div className={styles.modal_content}>
               {element}
               {element && <hr />}
               <div className={styles.title}>
@@ -32,12 +33,15 @@ export function Post({ elm, element, windowHeight, isPopUp }) {
                 isPopUp={isPopUp}
                 postId={elm.id}
                 windowHeight={windowHeight}
+                
               />
             </div>
+            <div  style={{height:'5vh', width:'100%'}}/>
           </div>
+          
         </div>
       )}
-      <div>
+      <div >
         {element}
         {element && <hr />}
         <div className={styles.title}>

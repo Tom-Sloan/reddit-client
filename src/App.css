@@ -5,11 +5,11 @@
 }
 
 
-
 :root {
   --numCol: 1;
   --maxWidthPercent: 50%;
   --headerAnimation: 0.4s;
   --headerHeight: 100px;
   --postBorderRadius: 10px;
+  --popUpHieght:0;
 }

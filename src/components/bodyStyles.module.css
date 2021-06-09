@@ -11,7 +11,7 @@
 
 .HeaderBar {
   min-height: 10%;
-  border: 2px dashed gold;
+  /* border: 2px dashed gold; */
 }
 
 .gridContainer {
@@ -82,22 +82,15 @@
   }
 }
 
-.scrollDownHeader {
-  transform: translate3d(0, -100%, 0);
-  transition: transform var(--headerAnimation);
-}
-
-.scrollUpHeader {
-  transform: none;
-  transition: transform var(--headerAnimation);
-}
-
-.scrollUpBody {
-  transform: none;
-  transition: transform var(--headerAnimation);
-}
-
-.scrollDownBody {
+.scrollDown {
   transform: translate3d(0, calc(-1*var(--headerHeight)), 0);
+}
+
+.scrollUp {
+  transform: none;
+}
+
+.animation{
   transition: transform var(--headerAnimation);
 }
+
