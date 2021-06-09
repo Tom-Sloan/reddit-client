@@ -32,8 +32,8 @@ export function BodySection() {
   const subredditPosts = useSelector(selectSubJsonPosts); // contains all posts urls
   const currentSubreddit = useSelector(selectCurrentSubredditName); //contains the key for which posts to view
   const isLoading = useSelector(isLoadingPosts); // so we know if we are just waiting for data
-  const isLoadingSub = useSelector(isLoadingSubreddit)
-  const failedToLoadSub = useSelector(failedToLoadSubreddit)
+  const isLoadingSub = useSelector(isLoadingSubreddit);
+  const failedToLoadSub = useSelector(failedToLoadSubreddit);
   const failedToLoad = useSelector(failedToLoadPosts); // so we know if thre is an error in data aqusistion
   const postdata = useSelector(selectPostsData); // contains all posts
   const numCols = useSelector(selectColumnNumber); //contians the layout format
@@ -131,13 +131,15 @@ export function BodySection() {
   let gridInsides;
 
   if (
-    !isLoadingSub && ! failedToLoadSub && !isLoading &&
+    !isLoadingSub &&
+    !failedToLoadSub &&
+    !isLoading &&
     !failedToLoad &&
     postdata[currentSubreddit] &&
     Object.values(postdata[currentSubreddit])
   ) {
     gridInsides = Array.apply(null, { length: numCols });
-  } else if(!failedToLoad&& !failedToLoadSub){
+  } else if (!failedToLoad && !failedToLoadSub) {
     dispatch(loadSubredditData({ subreddit: "EarthPorn" }));
     gridInsides = <p></p>;
   }

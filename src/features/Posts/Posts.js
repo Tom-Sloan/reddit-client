@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import styles from "./Posts.module.css";
 
@@ -41,12 +41,16 @@ export function Posts({ elm, windowHeight }) {
   }
 
   const handleClick = (e) => {
+    console.log('clicked')
     setPopUpState((prev) => !prev);
   };
 
+  useEffect(()=>{
+    console.log('changed!')
+  }, [popUpState])
   return (
-    <div className={`${styles.row} PostTile`} elm={elm} onClick={handleClick}>
-      {<Post elm={elm} element={element} isPopUp= {popUpState} windowHeight={windowHeight}/>}
+    <div  onClick={handleClick}>
+      {<Post elm={elm} element={element} isPopUp= {popUpState} windowHeight={windowHeight} />}
     </div>
   );
 }
