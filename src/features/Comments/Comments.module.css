@@ -26,3 +26,16 @@
     margin-bottom: 10px;
     border-radius: 0 0 var(--postBorderRadius) var(--postBorderRadius) ;
 }
+
+.sub {
+    background-color: rgba(220,220,220,0.5);
+    /* margin-left: 20px; */
+}
+/* 
+.plusBox {
+    background: darkcyan;
+}
+
+.subComment {
+
+} */

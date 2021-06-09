@@ -17,7 +17,7 @@ export const loadPosts = createAsyncThunk(
                 postData[elm[0].data.children[0].data.id] = {
                     id: elm[0].data.children[0].data.id,
                     title: elm[0].data.children[0].data.title,
-                    ups: elm[0].data.children[0].data.ups,
+                    ups: elm[0].data.children[0].data.score,
                     author: elm[0].data.children[0].data.author,
                     img: elm[0].data.children[0].data.url,
                     is_video: elm[0].data.children[0].data.is_video,

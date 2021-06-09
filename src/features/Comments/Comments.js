@@ -3,27 +3,33 @@ import { useSelector, useDispatch } from "react-redux";
 import styles from "./Comments.module.css";
 import { selectComments } from "./commentsSlice";
 import { selectCommentsToDisplay } from "../Posts/postSlice";
+import {Comment} from "../Comment/Comment";
 
-export function Comments({ postId, windowHeight }) {
+export function Comments({ isPopUp, postId, windowHeight }) {
   const [innerHeight, setHeight] = useState(0);
   let allCommentsData = useSelector(selectComments)[postId].map(
     (commentChunks) => commentChunks.data
   );
 
+  console.log(allCommentsData);
+
   const maxCommentLength = useSelector(selectCommentsToDisplay);
+
+  const handleClick = (e) => {
+    console.log('Loading!');
+    console.log(e);
+  }
 
   let element;
 
-  if (allCommentsData.length > 0) {
+    if (allCommentsData.length > 0) {
     element = allCommentsData.map((comment, index) => {
+      console.log(comment)
+      console.log(comment.data)
       if (index < allCommentsData.length - 1)
         return (
-          <div
-            id={"comment_" + postId + "-" + index}
-            className={styles.comment}
-          >
-            <p style={{ color: "blue" }}>{comment.author}</p>
-            <p>{comment.body}</p>
+          <div id={"comment_" + postId + "-" + index} className={styles.comment} >
+            <Comment author={comment.author} text={comment.body} children={comment.replies} isPopUp={isPopUp} />
             <hr />
           </div>
         );
@@ -31,6 +37,11 @@ export function Comments({ postId, windowHeight }) {
         <div id={"comment_" + postId + "-" + index} className={styles.comment}>
           <p style={{ color: "blue" }}>{comment.author}</p>
           <p>{comment.body}</p>
+          { isPopUp && (comment.replies) && (
+            <div className={styles.sub} >
+              <p> | {comment.replies.data.children[0].data.body}</p>
+            </div>
+          )}
           <div className={styles.endpoint}></div>
         </div>
       );
