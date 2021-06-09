@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "../Comments/Comments.module.css";
 
 export function Comment({ author, text, children, isPopUp }) {
     const [isExpanded, setIsExpanded] = useState(false);
 
     const handleClick = (e) => {
-        setIsExpanded(true);
+        setIsExpanded(!isExpanded);
     }
 
     return (
@@ -15,7 +15,12 @@ export function Comment({ author, text, children, isPopUp }) {
             { isPopUp && children && isExpanded && (
                 <div className={styles.sub} >
                     { children.data.children.map(child => {
-                        return <Comment author={child.data.author} text={child.data.body} children={child.data.replies} isPopUp={isPopUp} />
+                        return (
+                            <div>
+                                <div onClick={handleClick} >&#9960; Close Children</div>
+                                <Comment author={child.data.author} text={child.data.body} children={child.data.replies} isPopUp={isPopUp} />
+                            </div>
+                        ) 
                     }) }
                 </div>
             )}
