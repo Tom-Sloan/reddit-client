@@ -32,8 +32,6 @@ body {
     transition: 1s;
     box-shadow: 4px 4px 0 black;
     transform: skewX(-5deg);
-    
-  
 }
 
 .cta:focus {
@@ -55,9 +53,9 @@ body {
     margin-right: 45px;
 }
 
-  span {
+  /* span {
     transform: skewX(15deg) 
-  }
+  } */
 
   span:nth-child(2) {
     width: 20px;
