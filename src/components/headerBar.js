@@ -51,7 +51,7 @@ export function HeaderBar() {
   
   useEffect(() => {
     const updateWindowDimensions = () => {
-      const newHeight = document.getElementById('HeaderBar_id').clientHeight;
+      const newHeight = document.getElementById('titleHeader').clientHeight;
       document.documentElement.style.setProperty("--headerHeight", (newHeight+'px'));
     };
 

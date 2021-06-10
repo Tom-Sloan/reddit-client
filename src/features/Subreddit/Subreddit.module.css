@@ -1,38 +1,65 @@
+.activeBtn {
+  background-color: #535a12;
+  color: #f1f1f1 !important;
+}
 
-:root {
-    --headerColor: grey;
-  }
-  
+/* .scrollMenu {
+  min-height: 50%;
+  max-height: 50%;
+} */
+
+.SubredditButtonContainer {
+  margin: 0 5px;
+}
+
 .SubredditButton {
-    background-color: rgb(133, 134, 134);
-    border-radius: 5%;
-    padding: 0 5px;
-    margin: 5px 10px;
-    user-select: none;
-    cursor: pointer;
-    border: none;
-    width: fit-content;
+  color: #6d7336;
+
+  /* Btn css */
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding: 0px 20px;
+  width: 100%;
+  border-radius: 40px;
+  /* height: 40px; */
+  max-width: 250px;
+  margin: 1rem auto;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+
+  /* below is for text / anhor tag if used */
+  text-decoration: none;
+  line-height: 40px;
+}
+.SubredditButtonSpan {
+  position: absolute;
+  display: block;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 35%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  transition: width 0.4s ease-in-out, height 0.4s ease-in-out;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  opacity: 0.5;
+}
+.SubredditButton:hover {
+  color: #f1f1f1;
+  background-color: #383837;
+  transition: background-color 0.4s ease-in-out 0.1s;
+}
+.SubredditButtonSpan:hover {
+  width: 225%;
+  height: 10%;
+}
+.SubredditButton:active {
+  background-color: #535a12;
 }
 
-.activeBtn{
-    border: 1px green solid;
-}
-  
-  .menu-item-wrapper.active {
-    border: 1px blue solid;
-  }
-  .menu-item.active {
-    border: 1px green solid;
-  }
-  
-  .scroll-menu-arrow {
-    padding: 0px 20px;
-    cursor: pointer;
-  }
-  
-  .scrollMenu{
-    background-color: rgb(59, 59, 59);
-    min-height: 50%;
-    max-height: 50%;
-  }
-  
