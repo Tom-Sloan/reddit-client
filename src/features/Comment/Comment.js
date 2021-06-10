@@ -14,10 +14,10 @@ export function Comment({ author, text, children, isPopUp }) {
             <p style={{ color: "black" }}>{text}</p>
             { isPopUp && children && isExpanded && (
                 <div className={styles.sub} >
+                    <div className={styles.close} onClick={handleClick} >&#9960;</div>
                     { children.data.children.map(child => {
                         return (
                             <div>
-                                <div onClick={handleClick} >&#9960; Close Children</div>
                                 <Comment author={child.data.author} text={child.data.body} children={child.data.replies} isPopUp={isPopUp} />
                             </div>
                         ) 
@@ -26,7 +26,7 @@ export function Comment({ author, text, children, isPopUp }) {
             )}
             { isPopUp && children && !isExpanded && (
                 <div className={styles.sub} >
-                    <div onClick={handleClick} >&#9960; Load Children</div>
+                    <div onClick={handleClick} >&#9960;</div>
                 </div>
             )}
         </div>
