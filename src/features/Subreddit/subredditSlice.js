@@ -8,7 +8,7 @@ export const loadSubredditData = createAsyncThunk(
       search = false,
       limit = 100,
       timeframe = "month",
-      listing = "new",
+      listing = "hot",
     },
     thunkAPI
   ) => {
