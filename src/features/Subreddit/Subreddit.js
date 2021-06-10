@@ -11,7 +11,12 @@ export function Subreddit({ name, text, selected }) {
 
   function handleClick(e) {
     dispatch(loadSubredditData({ subreddit: name, search: false }));
-    document.querySelector("#bodySection_id").scrollTo(0, 0);
+    try{
+      document.querySelector("#bodySection_id").scrollTo(0, 0);
+    } catch(e) {
+      console.log(e)
+    }
+   
     dispatch(updatePostDisplayLimit(25));
   }
 
