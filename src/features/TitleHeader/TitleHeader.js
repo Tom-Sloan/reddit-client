@@ -61,8 +61,8 @@ export function TitleHeader() {
         <a
           ref={ref}
           className={styles.parallaxBtn}
-          href="#"
-          data-title="Reddit Profit"
+          href="https://www.tom-sloan.com/"
+          data-title="Reddit Client"
           onMouseMove={handleMove}
           onMouseLeave={handleLeave}
           onMouseDown={handleDown}

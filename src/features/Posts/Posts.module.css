@@ -1,6 +1,8 @@
 .gridImg {
-  max-width: 100%;
-  height: auto;
+  max-width: 100%; 
+  height: auto; 
+  /* width: 200px;
+  height: 400px; */
   object-fit: contain;
   border-radius: var(--postBorderRadius);
   /* border: solid 3px blue; */
